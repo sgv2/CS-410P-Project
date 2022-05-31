@@ -178,7 +178,7 @@ import argparse
 
 # Default base-directory for the checkpoints and log-files.
 # The environment-name will be appended to this.
-checkpoint_base_dir = 'checkpoints_tutorial16/'
+checkpoint_base_dir = 'checkpoints_tutorial16_2/'       # Data from Test 2
 
 # Combination of base-dir and environment-name.
 checkpoint_dir = None
@@ -1318,9 +1318,25 @@ class NeuralNetwork:
 
         return values
 
-    def optimize(self, min_epochs=1.0, max_epochs=10,
-                 batch_size=128, loss_limit=0.015,
-                 learning_rate=1e-3):
+    ## Template for Breakout ##
+    # def optimize(self, min_epochs=1.0, max_epochs=10,
+    #              batch_size=128, loss_limit=0.015,
+    #              learning_rate=1e-3):
+
+    ## Template for Space Invaders test 1 (checkpoints #2) ##
+    # def optimize(self, min_epochs=1.0, max_epochs=15,
+    #             batch_size=256, loss_limit=0.015,
+    #             learning_rate=1e-3):
+
+    ## Template for Space Invaders test 2 (checkpoints #3) ##
+    def optimize(self, min_epochs=1.0, max_epochs=15,
+                batch_size=256, loss_limit=0.015,
+                learning_rate=1e-5):
+
+    ## Template for Space Invaders test 3 (checkpoints #4) ##
+    # def optimize(self, min_epochs=1.0, max_epochs=15,
+    #             batch_size=256, loss_limit=0.015,
+    #             learning_rate=1e-2):
         """
         Optimize the Neural Network by sampling states and Q-values
         from the replay-memory.
@@ -1529,7 +1545,8 @@ class Agent:
         """
 
         # Create the game-environment using OpenAI Gym.
-        self.env = gym.make(env_name)
+        # self.env = gym.make(env_name)
+        self.env = gym.make(env_name, render_mode='human')
 
         # The number of possible actions that the agent may take in every step.
         self.num_actions = self.env.action_space.n
@@ -1567,8 +1584,8 @@ class Agent:
             # The following control-signals are only used during training.
 
             # The learning-rate for the optimizer decreases linearly.
-            self.learning_rate_control = LinearControlSignal(start_value=1e-3,
-                                                             end_value=1e-5,
+            self.learning_rate_control = LinearControlSignal(start_value=1e-5,
+                                                             end_value=1e-7,
                                                              num_iterations=5e6)
 
             # The loss-limit is used to abort the optimization whenever the
